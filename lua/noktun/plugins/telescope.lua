@@ -25,6 +25,7 @@ return {
       { 'debugloop/telescope-undo.nvim' },
     },
     config = function()
+      local actions = require 'telescope.actions'
       require('telescope').setup {
         extensions = {
           ['ui-select'] = {
@@ -37,9 +38,20 @@ return {
               preview_height = 0.8,
             },
           },
+          ['fzf'] = {},
+        },
+        defaults = {
+          mappings = {
+            i = {
+              ['<c-d>'] = actions.delete_buffer,
+            },
+            n = {
+              ['<c-d>'] = actions.delete_buffer,
+              ['dd'] = actions.delete_buffer,
+            },
+          },
         },
       }
-
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
@@ -51,7 +63,6 @@ return {
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
       vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
@@ -72,6 +83,8 @@ return {
       vim.keymap.set('n', '<leader>fc', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[F]ind Neovim [C]onfig files' })
+
+      require('noktun.telescope.multigrep').setup()
     end,
   },
 }

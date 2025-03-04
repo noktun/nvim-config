@@ -42,23 +42,17 @@ require('lazy').setup({
   -- Themes end
   { 'numToStr/Comment.nvim', opts = {} },
   { 'folke/zen-mode.nvim', opts = { width = 0.85 } },
-  {
-    'Shatur/neovim-ayu',
-    config = function()
-      require('ayu').setup {
-        mirage = true,
-      }
-    end,
-  },
   require 'noktun/plugins/gitsigns',
   require 'noktun/plugins/telescope',
   require 'noktun/plugins/lspconfig',
   require 'noktun/plugins/conform',
-  require 'noktun/plugins/cmp',
+  -- require 'noktun/plugins/cmp',
+  require 'noktun/plugins/blinkcmp',
   require 'noktun/plugins/todo-comments',
-  require 'noktun/plugins/mini',
+  -- require 'noktun/plugins/mini',
   require 'noktun/plugins/treesitter',
   require 'noktun.plugins.lint',
+  require 'noktun.plugins.harpoon',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
